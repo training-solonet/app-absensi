@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\AbsensiController;
+=======
+use App\Http\Controllers\AnggotaController;
+>>>>>>> d2c22ee0f447ae91bea25128e642e24886c07421
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +27,4 @@ Route::get('dashboard', function () {
 })->name('dashboard');
 
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');
