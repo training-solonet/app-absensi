@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
