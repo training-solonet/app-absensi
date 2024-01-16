@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AnggotaController extends Controller
+class StudentController extends Controller
 {
     public function index()
     {
@@ -14,5 +14,5 @@ class AnggotaController extends Controller
     public function edit()
     {
         return view('anggota.edit');
-    }
+    } 
 }

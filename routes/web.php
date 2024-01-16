@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +22,4 @@ Route::get('dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index');
+Route::get('/anggota', [StudentController::class, 'index'])->name('anggota.index');

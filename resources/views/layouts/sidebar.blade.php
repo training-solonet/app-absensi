@@ -54,7 +54,7 @@
                           <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
                         </g>
                       </g>
-                    </g>
+                    </g >
                   </g>
                 </svg>
               </span>
@@ -71,7 +71,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.html" class="menu-link">
+              <a href="/dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
@@ -81,17 +81,16 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Tables</span></li>
             <!-- Tables -->
             <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
+              <a href="/anggota" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables Anggota</div>
+                <div data-i18n="Tables">Data Siswa</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="tables-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables Report</div>
+                <div data-i18n="Tables">Laporan Absensi  </div>
               </a>
             </li>
           </ul>
         </aside>
-        <!-- / Menu -->
