@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\AbsensiController;
-=======
 use App\Http\Controllers\AnggotaController;
->>>>>>> d2c22ee0f447ae91bea25128e642e24886c07421
 
 /*
 |--------------------------------------------------------------------------
