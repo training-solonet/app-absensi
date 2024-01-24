@@ -1,25 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Absensi;
-use App\Models\Student;
-use App\Models\Uid;
+
 use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Models\Absensi;
+use App\Models\Uid;
 use Carbon\Carbon;
 
-class AbsensiController extends Controller
+class StudentController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $searchDate = $request->input('search_date', Carbon::now()->format('Y-m-d'));
-        
-        $absen = Absensi::whereDate('tanggal', $searchDate)->get();
+        $Students = Student::where('status', 'Aktif')
+        ->whereDate('date_in', '<=', Carbon::now())
+        ->whereDate('date_out', '>=', Carbon::now())
+        ->get();
+
         $uids = Uid::pluck('uid');
-        $Students = Student::pluck('name');
 
-        return view('absensi.index', compact('absen', 'searchDate', 'uids', 'Students'));
+        return view('siswa.index', compact('Students', 'uids'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -50,7 +51,10 @@ class AbsensiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+            $students = Student::findOrFail($id);
+            $uids = Uid::all();
+    
+            return view('siswa.edit', compact('students', 'uids'));
     }
 
     /**
@@ -58,7 +62,15 @@ class AbsensiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'uid' => 'required',
+            // tambahkan validasi lain sesuai kebutuhan
+        ]);
+
+        $students = Student::findOrFail($id);
+        $students->update($request->all());
+
+        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diupdate');
     }
 
     /**

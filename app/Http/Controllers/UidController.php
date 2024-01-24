@@ -1,25 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Absensi;
-use App\Models\Student;
-use App\Models\Uid;
+
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-
-class AbsensiController extends Controller
+use App\Models\Uid;
+class UidController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $searchDate = $request->input('search_date', Carbon::now()->format('Y-m-d'));
-        
-        $absen = Absensi::whereDate('tanggal', $searchDate)->get();
-        $uids = Uid::pluck('uid');
-        $Students = Student::pluck('name');
+        $uids = Uid::all();
 
-        return view('absensi.index', compact('absen', 'searchDate', 'uids', 'Students'));
+        return view('uid.index', compact('uids'));
     }
-
 
     /**
      * Show the form for creating a new resource.
