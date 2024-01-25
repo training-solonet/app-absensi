@@ -64,8 +64,8 @@
             @forelse ($absen as $key => $absensi)
               <tr>
                   <td>{{ $key + 1}}</td>
-                  <td>{{ $uids[$key] ?? 'N/A' }}</td>
-                  <td>{{ $Students[$key] ?? 'N/A' }}</td>
+                  <td>{{ $absensi->uid }}</td>
+                  <td>{{ $absensi->students->name }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
                   <td>{{ $absensi->keterangan }}</td>
@@ -82,7 +82,7 @@
     </div>
   </div>
 </div>
-              <!--/ Hoverable Table rows -->
+<!--/ Hoverable Table rows -->
 
 @endsection
 </body>

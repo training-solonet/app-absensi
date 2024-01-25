@@ -1,26 +1,40 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\Models\Absensi;
 use App\Models\Student;
 use App\Models\Uid;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class AbsensiController extends Controller
+class DashboardController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $searchDate = $request->input('search_date', Carbon::now()->format('Y-m-d'));
-        
-        $absen = Absensi::with(['students'])->whereDate('tanggal', $searchDate)->get();
-        
-        $uids = Uid::pluck('uid');
-        $Students = Student::pluck('name');
+        // Ambil data absen untuk siswa yang terlambat
+        $terlambat = Absensi::whereDate('tanggal', Carbon::today())
+            ->where('keterangan', 'Terlambat')
+            ->with('students')
+            ->get();
 
-        return view('absensi.index', compact('absen', 'searchDate', 'uids', 'Students'));
+        // Ambil data absen untuk siswa yang tidak hadir
+        $alfa = Absensi::whereDate('tanggal', Carbon::today())
+            ->where('keterangan', 'Alfa')
+            ->with('students')
+            ->get();
+
+        // Ambil data absen untuk siswa yang hadir
+        $hadir = Absensi::whereDate('tanggal', Carbon::today())
+            ->where('keterangan', 'Hadir')
+            ->with('students')
+            ->get();
+
+        return view('dashboard', compact('terlambat', 'alfa', 'hadir'));
     }
-
 
     /**
      * Show the form for creating a new resource.
