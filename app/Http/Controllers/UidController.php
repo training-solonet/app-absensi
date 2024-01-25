@@ -45,7 +45,7 @@ class UidController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('uid.edit');
     }
 
     /**

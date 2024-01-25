@@ -10,7 +10,7 @@ class Uid extends Model
     use HasFactory;
 
     protected $connection = 'mysql';
-    protected $table = 'uids';
+    protected $table = 'uid';
 
     protected $fillable = [
         'uid',
