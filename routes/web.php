@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UidController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +21,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::controller(AuthController::class)->group(function () {  
+    Route::get('login', 'login')->name('login');
+    Route::post('login', 'loginAction')->name('login.action');
+  
+    Route::get('logout', 'logout', function () {
+        return view('login');
+    })->middleware('auth')->name('logout');
+});
 
-Route::get('/anggota', [StudentController::class, 'index'])->name('anggota.index');
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resources([
+        'absensi' => AbsensiController::class,
+        'siswa' => StudentController::class,
+        'uid' => UidController::class,
+    ]);
+});

@@ -3,23 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\Models\Absensi;
 use App\Models\Uid;
-use Carbon\Carbon;
-
-class StudentController extends Controller
+class UidController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $Students = Student::where('status', 'Aktif')
-        ->whereDate('date_in', '<=', Carbon::now())
-        ->whereDate('date_out', '>=', Carbon::now())
-        ->get();
+        $uids = Uid::all();
 
-        $uids = Uid::pluck('uid');
-
-        return view('siswa.index', compact('Students', 'uids'));
+        return view('uid.index', compact('uids'));
     }
 
     /**
@@ -51,10 +45,7 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-            $students = Student::findOrFail($id);
-            $uids = Uid::all();
-    
-            return view('siswa.edit', compact('students', 'uids'));
+        //
     }
 
     /**
@@ -62,15 +53,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $this->validate($request, [
-            'uid' => 'required',
-            // tambahkan validasi lain sesuai kebutuhan
-        ]);
-
-        $students = Student::findOrFail($id);
-        $students->update($request->all());
-
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diupdate');
+        //
     }
 
     /**
