@@ -12,7 +12,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $Students = Student::where('status', 'Aktif')
+        $Students = Student::with(['uid'])->where('status', 'Aktif')
         ->whereDate('date_in', '<=', Carbon::now())
         ->whereDate('date_out', '>=', Carbon::now())
         ->get();

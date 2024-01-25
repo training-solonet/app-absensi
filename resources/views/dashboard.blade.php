@@ -73,6 +73,48 @@
                           <span>List Siswa</span>
                         </div>
                           </div>
+                          <ul class="p-0 m-0">
+                        <li class="d-flex mb-4 pb-1">
+                          <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-primary"
+                              ><i class="bx bx-user"></i
+                            ></span>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <div class="me-2">
+                            @foreach($hadir as $absen)
+                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
+                              <small class="text-muted">{{ $absen->keterangan }}</small>
+                              @endforeach
+                            </div>
+                          </div>
+                          <li class="d-flex mb-4 pb-1">
+                          <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-user"></i></span>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                          <div class="me-2">
+                            @foreach($terlambat as $absen)
+                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
+                              <small class="text-muted">{{ $absen->keterangan }}</small>
+                              @endforeach
+                            </div>
+                          </div>
+                        </li>
+                        <li class="d-flex mb-4 pb-1">
+                          <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-secondary"
+                              ><i class="bx bx-user"></i
+                            ></span>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                          <div class="me-2">
+                            @foreach($alfa as $absen)
+                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
+                              <small class="text-muted">{{ $absen->keterangan }}</small>
+                              @endforeach
+                            </div>
+                          </div>
                         </li>
                       </ul>
                     </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UidController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +32,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
 
     Route::resources([
         'absensi' => AbsensiController::class,
