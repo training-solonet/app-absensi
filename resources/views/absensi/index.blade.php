@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabel Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 </head>
 <body>
 @extends('layouts.app')
@@ -14,7 +16,7 @@
     <h4 class="fw-bold py-3 mb-4">Report Absensi</h4>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">
       Cari Berdasarkan Tanggal
     </button>
 
@@ -48,7 +50,8 @@
     <div class="card">
       <h5 class="card-header">Data Absensi</h5>                
       <div class="table-responsive text-nowrap">
-        <table class="table table-hover">
+        <div class="container mt-3">
+        <table id="myTable" class="table table-hover">
           <thead>
             <tr>
               <th>No</th>
@@ -78,6 +81,15 @@
             @endforelse
           </tbody>
         </table>
+        </div>
+        <script
+          src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+        <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script>
+          let table = new DataTable('#myTable');
+        </script>
       </div>
     </div>
   </div>

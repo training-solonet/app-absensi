@@ -47,7 +47,7 @@
     <div class="card">
       <h5 class="card-header">Data UID</h5>
         <div class="table-responsive text-nowrap">
-          <div class="container">
+          <div class="container mt-3">
           <table id="myTable" class="table table-hover">
           <thead>
             <tr>
