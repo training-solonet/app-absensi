@@ -63,17 +63,13 @@
                   <td>{{ $uid->uid }}</td>
                   <td>
                   <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                  <div class="dropdown-menu">
-                    <form action="{{ route('uid.destroy', $uid->uid) }}" method="POST">
+                    <form id="delete-form-{{ $uid->uid }}" action="{{ route('uid.destroy', $uid->uid) }}" method="POST">
                     @csrf
                     @method('DELETE') 
-                    <a class="dropdown-item" onclick="return confirm('Apakah Anda yakin ingin menghapus uid ini?')">
-                    <i class="bx bx-trash-alt me-1"></i> Delete</a>
+                    <button type="button" class="btn btn-outline-danger" fdprocessedid="msacf" onclick="confirmDelete('{{ $uid->uid }}')">
+                    <span class="tf-icons bx bx-trash-alt me-1"></span>
+                    </button>
                     </form>
-                </div>
               </div>
               </td>
             </tr>
@@ -84,6 +80,14 @@
             @endforelse
           </tbody>          
         </table>
+        <script>
+        function confirmDelete(uidId) {
+            if (confirm('Apakah Anda yakin ingin menghapus UID ini?')) {
+                event.preventDefault();
+                document.getElementById('delete-form-' + uidId).submit();
+            }
+        }
+    </script>
         </div>
         <script
           src="https://code.jquery.com/jquery-3.7.1.min.js"
