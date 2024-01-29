@@ -74,8 +74,6 @@
                         </li>
                       </ul>
                     </div>
-                  </div>
-                </div>
                 <!--/ Order Statistics -->
 
                 <!-- Expense Overview -->
@@ -108,10 +106,8 @@
                       </ul>
                     </div>
                   </div>
-                </div>
-                <!--/ Expense Overview -->
-              </div>
-            
+        <!--/ Expense Overview -->
+        
 
              <!-- Expense Overview -->
              <div class="col-md-6 col-lg-4 order-1 mb-4">
@@ -143,15 +139,10 @@
                           </div>
                         </li>
                       </ul>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-              
-            </div>
-            @endsection
-                <!--/ Expense Overview -->
-
+                    </div>  
+        <!--/ Expense Overview -->
+        </div>
+      </div>
+        @endsection
 </body>
 </html>
