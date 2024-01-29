@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Uid;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+
+
 class UidController extends Controller
 {
     /**
@@ -12,7 +15,6 @@ class UidController extends Controller
     public function index()
     {
         $uids = Uid::all();
-
         return view('uid.index', compact('uids'));
     }
 
@@ -21,7 +23,7 @@ class UidController extends Controller
      */
     public function create()
     {
-        //
+        return view('uid.create');
     }
 
     /**
@@ -29,7 +31,13 @@ class UidController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'uid' => 'required|string|size:11',
+        ]);
+
+        Uid::create($request->all());
+
+        return redirect()->route('uid.index')->with('success', 'Uid created successfully.');
     }
 
     /**
@@ -43,24 +51,27 @@ class UidController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Uid $uid)
     {
-        return view('uid.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Uid $uid)
     {
         //
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Uid $uid)
     {
-        //
+        $uid->delete();
+
+        return redirect()->route('uid.index')->with('success', 'Uid deleted successfully.');
     }
 }
