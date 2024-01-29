@@ -17,9 +17,7 @@ class StudentController extends Controller
         ->whereDate('date_out', '>=', Carbon::now())
         ->get();
 
-        $uids = Uid::pluck('uid');
-
-        return view('siswa.index', compact('Students', 'uids'));
+        return view('siswa.index', compact('Students'));
     }
 
     /**

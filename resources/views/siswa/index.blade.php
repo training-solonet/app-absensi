@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabel Anggota</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css')" />
 </head>
 <body> 
   
@@ -31,7 +30,7 @@
               <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $student->name }}</td>
-                  <td>{{ $uids[$key] ?? 'N/A' }}</td>
+                  <td>{{ $student->Uid->uid}}</td>
                   <td>
                   <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -51,14 +50,6 @@
             @endforelse
           </tbody>          
         </table>
-
-        <script>
-          let table = new DataTable('#example');
-          $(document).ready( function () {
-            $('example').DataTable();
-          });
-        </script>
-
       </div>
     </div>
   </div>
@@ -66,6 +57,5 @@
 <!--/ Hoverable Table rows -->
 
 @endsection
-<script type="text/javascript" charset="UTF-8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
