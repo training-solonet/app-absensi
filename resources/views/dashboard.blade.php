@@ -44,75 +44,31 @@
                 </div>
                 </div>
               <div class="row">
-                <!-- Order Statistics -->
-                <div class="col-lg-50 mb-4 order-0">
+               <!-- Order Statistics -->
+                <div class="col-md-6 col-lg-4 order-1 mb-4">
                   <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                    <div class="card-header">
                       <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Absensi Hari Ini</h5>
-                      </div>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="orederStatistics"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                          <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        </div>
+                        <h5 class="m-0 mb-0">Siswa hadir hari ini</h5>
                       </div>
                     </div>
                     <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex flex-column align-items-center gap-1">
-                          <span>List Siswa</span>
-                        </div>
-                          </div>
-                          <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
+                      <ul class="p-0 m-0">
+                      @forelse($hadir as $absen)
+                      <li class="d-flex mb-4 pb-1">
                           <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"
-                              ><i class="bx bx-user"></i
-                            ></span>
+                            <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-user"></i>
+                          </span>
                           </div>
                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div class="me-2">
-                            @foreach($hadir as $absen)
                               <h6 class="mb-0">{{ $absen->students->name }}</h6>
                               <small class="text-muted">{{ $absen->keterangan }}</small>
-                              @endforeach
-                            </div>
-                          </div>
-                          <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-user"></i></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            @foreach($terlambat as $absen)
-                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
-                              <small class="text-muted">{{ $absen->keterangan }}</small>
-                              @endforeach
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-secondary"
-                              ><i class="bx bx-user"></i
-                            ></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            @foreach($alfa as $absen)
-                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
-                              <small class="text-muted">{{ $absen->keterangan }}</small>
-                              @endforeach
+                              @empty
+                              <div class="text-primary">
+                                "Tidak ada siswa yang hadir hari ini"
+                              </div>
+                              @endforelse
                             </div>
                           </div>
                         </li>
@@ -121,11 +77,81 @@
                   </div>
                 </div>
                 <!--/ Order Statistics -->
+
+                <!-- Expense Overview -->
+                <div class="col-md-6 col-lg-4 order-1 mb-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                    <div class="card-title mb-0">
+                        <h5 class="m-0 mb-0">Siswa terlambat hari ini</h5>
+                      </div>
+                      <div class="card-body px-0">
+                      <ul class="p-0 m-0">
+                      @forelse($terlambat as $absen) 
+                      <li class="d-flex mb-4 pb-1">
+                          <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-user"></i>
+                          </span>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <div class="me-2"> 
+                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
+                              <small class="text-muted">{{ $absen->keterangan }}</small>
+                              @empty
+                              <div class="text-danger">
+                                "Tidak ada siswa yang terlambat hari ini"
+                              </div>
+                              @endforelse
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--/ Expense Overview -->
               </div>
+            
+
+             <!-- Expense Overview -->
+             <div class="col-md-6 col-lg-4 order-1 mb-4">
+                  <div class="card h-100">
+                    <div class="card-header">
+                    <div class="card-title mb-0">
+                        <h5 class="m-0 mb-0">Siswa alfa hari ini</h5>
+                      </div>
+                      <div class="card-body px-0">
+                      <ul class="p-0 m-0">
+                         @forelse($alfa as $absen)  
+                      <li class="d-flex mb-4 pb-1">
+                          <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-secondary"><i class="bx bx-user"></i>
+                          </span>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <div class="me-2">  
+                              <h6 class="mb-0">{{ $absen->students->name }}</h6>
+                              <small class="text-muted">{{ $absen->keterangan }}</small>
+                              @empty
+                              <div class="text-secondary">
+                                "Tidak ada siswa yang alfa hari ini"
+                              </div>
+                              @endforelse
+                            </div>
+                            </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              
             </div>
-            <!-- / Content -->
+            @endsection
+                <!--/ Expense Overview -->
 
-
-    @endsection
 </body>
 </html>
