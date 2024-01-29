@@ -68,10 +68,11 @@ class UidController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Uid $uid)
+    public function destroy($uid)
     {
-        $uid->delete();
+        $uidData = Uid::where('uid', $uid)->firstOrFail();
+        $uidData->delete();
 
-        return redirect()->route('uid.index')->with('success', 'Uid deleted successfully.');
+        return redirect()->route('uid.index')->with('success', 'UID berhasil dihapus');
     }
 }
