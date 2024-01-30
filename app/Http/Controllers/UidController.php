@@ -32,7 +32,7 @@ class UidController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'uid' => 'required|string|size:11',
+            'uid' => 'required',
         ]);
 
         Uid::create($request->all());

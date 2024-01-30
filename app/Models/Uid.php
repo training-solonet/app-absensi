@@ -12,10 +12,9 @@ class Uid extends Model
     protected $connection = 'mysql';
     protected $table = 'uid';
 
-    protected $fillable = [
-        'uid',
-        'id_siswa',
-    ];
+    protected $primaryKey = 'uid';
+    public $incrementing = false;
+    protected $fillable = ['id_siswa', 'uid'];
 
     protected $hidden = [
         'created_at',
