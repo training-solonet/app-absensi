@@ -2,9 +2,9 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="#" class="app-brand-link">
               <span class="app-brand-logo demo">
-              <img style="width: 175px; height: 80px;" src="{{ asset('assets/img/logo.png') }} ">
+              <img style="width: 175px; height: 55px;" src="{{ asset('assets/img/logo.png') }} ">
               </span>
             </a>
 
@@ -37,7 +37,7 @@
               <a href="/absensi" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Laporan Absensi  </div>
-              </a>
+              </a> 
             </li>
             <li class="menu-item">
               <a href="/uid" class="menu-link">
