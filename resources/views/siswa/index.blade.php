@@ -33,7 +33,7 @@
               <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $student->name }}</td>
-                  <td>{{ $student->Uid}}</td>
+                  <td>{{ $student->uid}}</td>
                   <td>
                   <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
