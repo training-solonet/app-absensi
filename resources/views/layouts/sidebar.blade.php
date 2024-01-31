@@ -17,7 +17,7 @@
 
           <ul class="menu-inner py-1 overflow-auto">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
               <a href="/dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -27,19 +27,19 @@
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Tables</span></li>
             <!-- Tables -->
-            <li class="menu-item">
+            <li class="menu-item {{ request()->is('siswa') ? 'active' : '' }}">
               <a href="/siswa" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Tables Siswa</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ request()->is('absensi') ? 'active' : '' }}">
               <a href="/absensi" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Laporan Absensi  </div>
-              </a> 
+              </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ request()->is('uid') ? 'active' : '' }}">
               <a href="/uid" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Tables UID</div>
