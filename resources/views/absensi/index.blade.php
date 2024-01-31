@@ -60,7 +60,6 @@
               <th>Masuk</th>
               <th>Pulang</th>
               <th>Keterangan</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
