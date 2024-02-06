@@ -13,27 +13,40 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() 
     {
-        // Ambil data absen untuk siswa yang terlambat
-        $terlambat = Absensi::whereDate('tanggal', Carbon::today())
+
+        // Tanggal yang ingin ditampilkan absennya
+        $targetDate = Carbon::parse('2023-12-11')->toDateString();
+
+        // Ambil data absen siswa yang terlambat dan alfa pada tanggal tertentu
+        $terlambat = Absensi::with(['students'])
+            ->where('tanggal', $targetDate)
             ->where('keterangan', 'Terlambat')
-            ->with('students')
             ->get();
 
-        // Ambil data absen untuk siswa yang tidak hadir
-        $alfa = Absensi::whereDate('tanggal', Carbon::today())
+        $alfa = Absensi::with(['students'])
+            ->where('tanggal', $targetDate)
             ->where('keterangan', 'Alfa')
-            ->with('students')
             ->get();
 
-        // Ambil data absen untuk siswa yang hadir
-        $hadir = Absensi::whereDate('tanggal', Carbon::today())
-            ->where('keterangan', 'Hadir')
-            ->with('students')
-            ->get();
+            $student = Student::all();
 
-        return view('dashboard', compact('terlambat', 'alfa', 'hadir'));
+        return view('dashboard', compact('targetDate','terlambat', 'alfa', 'student'));
+
+        // Ambil data absen untuk siswa yang terlambat
+        // $terlambat = Absensi::whereDate('tanggal', Carbon::today())
+        //     ->where('keterangan', 'Terlambat')
+        //     ->with('students')
+        //     ->get();
+
+        // // Ambil data absen untuk siswa yang tidak hadir
+        // $alfa = Absensi::whereDate('tanggal', Carbon::today())
+        //     ->where('keterangan', 'Alfa')
+        //     ->with('students')
+        //     ->get();
+
+        // return view('dashboard', compact('terlambat', 'alfa')); 
     }
 
     /**
