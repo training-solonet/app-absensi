@@ -25,8 +25,13 @@ class Absensi extends Model
     ];
 
     public function students()
-{
-    return $this->belongsTo(\App\Models\Student::class, 'id_siswa', 'id');
-}
+    {
+        return $this->belongsTo(Student::class, 'id_siswa', 'id');
+    }
+
+    public function majors()
+    {
+        return $this->belongsTo(Major::class, 'majors_id', 'id');
+    }
 
 }

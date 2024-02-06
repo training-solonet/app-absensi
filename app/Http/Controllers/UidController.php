@@ -70,9 +70,9 @@ class UidController extends Controller
      */
     public function destroy($uid)
     {
-        $uidData = Uid::where('uid', $uid)->firstOrFail();
-        $uidData->delete();
+        // $uidData = Uid::where('uid', $uid)->firstOrFail();
+        // $uidData->delete();
 
-        return redirect()->route('uid.index')->with('success', 'UID berhasil dihapus');
+        // return redirect()->route('uid.index')->with('success', 'UID berhasil dihapus');
     }
 }

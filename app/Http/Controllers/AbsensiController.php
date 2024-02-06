@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Absensi;
 use App\Models\Student;
 use App\Models\Uid;
+use App\Models\Major;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -11,16 +12,24 @@ class AbsensiController extends Controller
 {
     public function index(Request $request)
     {
-        $searchDate = $request->input('search_date', Carbon::now()->format('Y-m-d'));
-        
-        $absen = Absensi::with(['students'])->whereDate('tanggal', $searchDate)->get();
-        
-        $uids = Uid::pluck('uid');
-        $Students = Student::pluck('name');
+        // Ambil tanggal dari request, atau gunakan tanggal hari ini jika tidak ada
+        $searchStartDate = $request->input('start_date', Carbon::now()->toDateString());
+        $searchEndDate = $request->input('end_date', Carbon::now()->toDateString());
 
-        return view('absensi.index', compact('absen', 'searchDate', 'uids', 'Students'));
+        // Filter data absensi berdasarkan rentang tanggal
+        $absen = Absensi::with(['students', 'majors'])
+            ->whereBetween('tanggal', [$searchStartDate, $searchEndDate])
+            ->get();
+
+        // Format tanggal untuk menampilkan pada keterangan di atas tabel
+        $formattedStartDate = Carbon::parse($searchStartDate)->format('d-m-Y');
+        $formattedEndDate = Carbon::parse($searchEndDate)->format('d-m-Y');
+
+        // Ambil semua nama siswa untuk dropdown pencarian
+        $students = Student::pluck('name');
+
+        return view('absensi.index', compact('absen', 'searchStartDate', 'searchEndDate', 'formattedStartDate', 'formattedEndDate', 'students'));
     }
-
 
     /**
      * Show the form for creating a new resource.

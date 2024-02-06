@@ -53,7 +53,7 @@
             <tr>
               <th>No</th>
               <th>UID</th>
-              <th>Actions</th>
+              <!-- <th>Actions</th> -->
             </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
               <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $uid->uid }}</td>
-                  <td>
+                  <!-- <td>
                   <div class="dropdown">
                     <form id="delete-form-{{ $uid->uid }}" action="{{ route('uid.destroy', $uid->uid) }}" method="POST">
                     @csrf
@@ -71,7 +71,7 @@
                     </button>
                     </form>
               </div>
-              </td>
+              </td> -->
             </tr>
             @empty
             <div class="alert alert-danger">
@@ -80,14 +80,14 @@
             @endforelse
           </tbody>          
         </table>
-        <script>
+        <!-- <script>
         function confirmDelete(uidId) {
             if (confirm('Apakah Anda yakin ingin menghapus UID ini?')) {
                 event.preventDefault();
                 document.getElementById('delete-form-' + uidId).submit();
             }
         }
-        </script>
+        </script> -->
         </div>
         <script
           src="https://code.jquery.com/jquery-3.7.1.min.js"

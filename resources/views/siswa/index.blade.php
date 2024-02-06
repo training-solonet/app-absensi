@@ -15,6 +15,43 @@
 <!-- Hoverable Table rows -->
 <div class="container-xxl flex-grow-1 container-p-y">
   <h4 class="fw-bold py-3 mb-4"></span> DATA ANGGOTA SISWA</h4>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">
+  Tampilkan Siswa Berdasarkan Jurusan
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Pilih Jurusan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="GET" action="{{ route('siswa.index') }}">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col mb-3">
+              <label for="search" class="form-label">Jurusan:</label>
+              <select name="search" class="form-select" id="search">
+                <option value="">Semua Jurusan</option>
+                @foreach($majors as $major)
+                <option value="{{ $major->name }}">{{ $major->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
     <div class="card">
       <h5 class="card-header">Data Siswa PKL Aktif</h5>
         <div class="table-responsive text-nowrap">
@@ -24,7 +61,7 @@
             <tr>
               <th>No</th>
               <th>Nama</th>
-              <th>UID</th>
+              <th>Jurusan</th>
               <th>Actions</th>
             </tr>
             </thead>
@@ -33,17 +70,44 @@
               <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ $student->name }}</td>
-                  <td>{{ $student->uid}}</td>
+                  <td>{{ $student->majors->name}}</td>
                   <td>
-                  <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                      <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('siswa.edit', $student->id) }}">
-                    <i class="bx bx-edit-alt me-1"></i> Edit</a>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
+                    Launch modal
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="fullscreenModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalFullTitle">Modal title</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="GET" action="{{ route('siswa.index', $student->id) }}">
+                        <div class="modal-body">
+                        <img class="img-fluid d-flex mx-auto my-4"
+                          src="{{ 'https://siswa.cvconnectis.com/images/'.$student->img }}"
+                          alt="foto siswa"/>
+                          <p class="card-text">Nama : {{ $student->name }}</p>
+                          <!-- Tampilkan UID jika ada -->
+                        @if ($student->Uid)
+                          <p class="card-text">UID : {{ $student->Uid->uid }}</p>
+                        @else
+                          <p class="card-text">UID: Tidak Ada</p>
+                        @endif
+                          <p class="card-text">Alamat : {{ $student->address }}</p>
+                          <p class="card-text">Jurusan : {{ $student->majors->name}}</p>
+                          <p class="card-text">Asal Sekolah : {{ $student->school->name}}</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
-                </div>
                 </td>
               </tr>
             @empty

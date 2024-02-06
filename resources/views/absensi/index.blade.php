@@ -17,7 +17,7 @@
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">
-      Cari Berdasarkan Tanggal
+      Filter Pencarian
     </button>
 
     <!-- Modal -->
@@ -30,10 +30,14 @@
           </div>
           <div class="modal-body">
           <form method="GET" action="{{ route('absensi.index') }}">
-            <div class="row">
-              <div class="col mb-3">
-                <label for="search_date" class="form-label">Masukan Tanggal</label>
-                <input type="date" name="search_date" id="search_date" value="{{ $searchDate }}" class="form-control" >
+              <div class="row g-2">
+              <div class="col mb-0">
+                <label for="start_date" class="form-label">Awal Tanggal</label>
+                <input type="date" name="start_date" id="start_date"class="form-control" value="{{ $searchStartDate }}" required>
+              </div>
+              <div class="col mb-0">
+                <label for="end_date" class="form-label">Masukan Tanggal</label>
+                <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
               </div>
             </div>
           </div>
@@ -48,15 +52,18 @@
 
     <!-- Hoverable Table rows -->
     <div class="card">
-      <h5 class="card-header">Data Absensi</h5>                
+      <h5 class="card-header">Data Absensi
+      @if(isset($formattedStartDate) && isset($formattedEndDate))
+      (Data dari {{ $formattedStartDate }} hingga {{ $formattedEndDate }})
+      @endif</h5>                
       <div class="table-responsive text-nowrap">
         <div class="container mt-3">
         <table id="myTable" class="table table-hover">
           <thead>
             <tr>
               <th>No</th>
-              <th>Uid</th>
               <th>Nama</th>
+              <th>Jurusan</th>
               <th>Masuk</th>
               <th>Pulang</th>
               <th>Keterangan</th>
@@ -66,8 +73,8 @@
             @forelse ($absen as $key => $absensi)
               <tr>
                   <td>{{ $key + 1}}</td>
-                  <td>{{ $absensi->uid }}</td>
                   <td>{{ $absensi->students->name }}</td>
+                  <td>{{ $absensi->students->majors->name}}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
                   <td>{{ $absensi->keterangan }}</td>
