@@ -46,11 +46,21 @@ class Student extends Model
 
     public function uid()
     {
-        return $this->hasOne(\App\Models\Uid::class, 'id_siswa', 'id');
+        return $this->hasOne(Uid::class, 'id_siswa', 'id');
     }
 
     public function absen()
     {
-        return $this->hasMany(\App\Models\Absensi::class, 'id_siswa', 'id');
+        return $this->hasMany(Absensi::class, 'id_siswa', 'id');
+    }
+
+    public function majors()
+    {
+        return $this->belongsTo(Major::class, 'majors_id', 'id');
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class, 'school_id', 'id');
     }
 }

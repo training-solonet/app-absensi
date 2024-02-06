@@ -14,7 +14,10 @@ class Uid extends Model
 
     protected $primaryKey = 'uid';
     public $incrementing = false;
-    protected $fillable = ['id_siswa', 'uid'];
+    protected $fillable = [
+        'id_siswa', 
+        'uid'
+    ];
 
     protected $hidden = [
         'created_at',
