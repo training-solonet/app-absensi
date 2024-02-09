@@ -16,10 +16,20 @@ class AbsensiController extends Controller
         $searchStartDate = $request->input('start_date', Carbon::now()->toDateString());
         $searchEndDate = $request->input('end_date', Carbon::now()->toDateString());
 
+        // Ambil jurusan dari request
+        $selectedMajor = $request->input('majors');
+
         // Filter data absensi berdasarkan rentang tanggal
         $absen = Absensi::with(['students', 'majors'])
             ->whereBetween('tanggal', [$searchStartDate, $searchEndDate])
-            ->get();
+            ->when($selectedMajor, function ($query) use ($selectedMajor) {
+                
+
+                // Filter berdasarkan jurusan jika dipilih
+                $query->whereHas('majors', function ($subquery) use ($selectedMajor) {
+                    $subquery->where('name', $selectedMajor);
+                });
+            })->get();
 
         // Format tanggal untuk menampilkan pada keterangan di atas tabel
         $formattedStartDate = Carbon::parse($searchStartDate)->format('d-m-Y');
@@ -28,7 +38,34 @@ class AbsensiController extends Controller
         // Ambil semua nama siswa untuk dropdown pencarian
         $students = Student::pluck('name');
 
-        return view('absensi.index', compact('absen', 'searchStartDate', 'searchEndDate', 'formattedStartDate', 'formattedEndDate', 'students'));
+        // Ambil semua nama jurusan untuk dropdown pencarian
+        $majors = Major::pluck('name');
+
+
+        // Contoh filter berdasarkan kolom 'name' dengan nilai $jurusan
+        // $majors = Major::all();
+
+        // $selectedMajors = $request->input('major');
+        // $filteredMajors = Major::where('name', $selectedMajors)->get();
+
+        // $absen = Absensi::whereHas('majors', function ($query) use ($selectedMajors) {
+        // $query->where('name', $selectedMajors);
+        // })->get();
+        
+        // if($request->tanggal)
+        //     $absen = Absensi::with(['students'])
+        //     ->where('tanggal' > $request->date)
+        //     ->get();
+        //     else{
+        //         $absen = Absensi::with(['students'])
+        //     // ->where('tanggal', >, $request->date)
+        //     ->get();
+        //     }
+        //     // return $absen;
+
+
+
+        return view('absensi.index', compact('absen', 'searchStartDate', 'searchEndDate', 'formattedStartDate', 'formattedEndDate', 'students', 'majors', 'selectedMajor'));
     }
 
     /**
