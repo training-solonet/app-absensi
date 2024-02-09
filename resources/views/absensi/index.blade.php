@@ -21,34 +21,44 @@
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Cari Data Absensi</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-          <form method="GET" action="{{ route('absensi.index') }}">
-              <div class="row g-2">
-              <div class="col mb-0">
-                <label for="start_date" class="form-label">Awal Tanggal</label>
-                <input type="date" name="start_date" id="start_date"class="form-control" value="{{ $searchStartDate }}" required>
-              </div>
-              <div class="col mb-0">
-                <label for="end_date" class="form-label">Masukan Tanggal</label>
-                <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
-              </div>
+<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Cari Data Absensi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="GET" action="{{ route('absensi.index') }}">
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="start_date" class="form-label">Awal Tanggal</label>
+              <input type="date" name="start_date" id="start_date" class="form-control" value="{{ $searchStartDate }}" required>
+            </div>
+            <div class="col mb-0">
+              <label for="end_date" class="form-label">Masukan Tanggal</label>
+              <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="major" class="form-label">Jurusan</label>
+              <select name="major" class="form-select" id="major">
+                <option value="">Semua Jurusan</option>
+                @foreach($majors as $major)
+                  <option value="{{ $major }}">{{ $major }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Cari</button>
-          </form>
           </div>
-        </div>
+        </form>
       </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Hoverable Table rows -->
     <div class="card">

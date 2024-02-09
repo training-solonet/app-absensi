@@ -39,5 +39,6 @@ Route::middleware('auth')->group(function () {
         'absensi' => AbsensiController::class,
         'siswa' => StudentController::class,
         'uid' => UidController::class,
+        
     ]);
 });
