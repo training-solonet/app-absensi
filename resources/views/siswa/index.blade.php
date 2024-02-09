@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabel Anggota</title>
+    <title>Tabel Siswa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 </head>
@@ -52,80 +52,54 @@
   </div>
 </div>
 
-    <div class="card">
-      <h5 class="card-header">Data Siswa PKL Aktif</h5>
-        <div class="table-responsive text-nowrap">
-          <div class="container mt-3">
-          <table id="myTable" class="table table-hover">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama</th>
-              <th>Jurusan</th>
-              <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            @forelse ($Students as $key => $student)
-              <tr>
-                  <td>{{ $key + 1 }}</td>
-                  <td>{{ $student->name }}</td>
-                  <td>{{ $student->majors->name}}</td>
-                  <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
-                    Launch modal
-                  </button>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="fullscreenModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-fullscreen" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="modalFullTitle">Modal title</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="GET" action="{{ route('siswa.index', $student->id) }}">
-                        <div class="modal-body">
-                        <img class="img-fluid d-flex mx-auto my-4"
-                          src="{{ 'https://siswa.cvconnectis.com/images/'.$student->img }}"
-                          alt="foto siswa"/>
-                          <p class="card-text">Nama : {{ $student->name }}</p>
-                          <!-- Tampilkan UID jika ada -->
-                        @if ($student->Uid)
-                          <p class="card-text">UID : {{ $student->Uid->uid }}</p>
-                        @else
-                          <p class="card-text">UID: Tidak Ada</p>
-                        @endif
-                          <p class="card-text">Alamat : {{ $student->address }}</p>
-                          <p class="card-text">Jurusan : {{ $student->majors->name}}</p>
-                          <p class="card-text">Asal Sekolah : {{ $student->school->name}}</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            @empty
-            <div class="alert alert-danger">
-                Data Post belum Tersedia.
-            </div>
-            @endforelse
-          </tbody>          
-        </table>
+<div class="card">
+  <h5 class="card-header">Data Siswa PKL Aktif</h5>
+    <div class="table-responsive text-nowrap">
+      <div class="container mt-3">
+      <table id="myTable" class="table table-hover">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Jurusan</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse ($students as $key => $student)
+          <tr>
+              <td>{{ $key + 1 }}</td>
+              <td>{{ $student->name }}</td>
+              <td>{{ $student->majors->name}}</td>
+              <td>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $student->id }}">
+                Detail
+              </button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $student->id }}">
+                Edit
+            </button>
+            </td>
+          </tr>
+          @include('siswa.show', ['student' => $student])
+          @include('siswa.edit', ['student' => $student])
+    </td>
+  </tr>
+      @empty
+      <div class="alert alert-danger">
+          Data Post belum Tersedia.
       </div>
+      @endforelse
+    </tbody>          
+  </table>
+    </div>
       <script
-          src="https://code.jquery.com/jquery-3.7.1.min.js"
-          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-          crossorigin="anonymous"></script>
-        <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-        <script>
-          let table = new DataTable('#myTable');
-        </script>
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+      <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+      <script>
+        let table = new DataTable('#myTable');
+      </script>
       </div>
     </div>
   </div>

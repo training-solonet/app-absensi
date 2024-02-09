@@ -1,66 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Anggota</title>
-</head>
-
-<body>
-  @extends('layouts.app')
-
-  @section('contents')
-
-  <!-- Basic with Icons -->
-  <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">EDIT DATA SISWA</h4>
-    <div class="col-xxl">
-      <div class="card mb-4">
-        <div class="card-header d-flex align-items-center justify-content-between">
-          <h5 class="mb-0">Edit Data UID Siswa PKL</h5>
+<!-- Edit Modal -->
+  <div class="modal fade" id="editModal{{ $student->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="card-body">
-          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-          <form method="POST" action="{{ route('siswa.update', $students->id) }}">
-            @csrf
-            @method('PUT')
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="name">Nama</label>
-              <div class="col-sm-10">
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-fullname2" class="input-group-text">
-                    <i class="bx bx-user"></i></span>
-                  <input type="text" class="form-control" id="name" name="name" value="{{ $students->name }}" aria-label="Nama" aria-describedby="basic-icon-default-fullname2" disabled />
+        <form method="POST" action="{{ route('siswa.update', $student->id) }}">
+        @csrf
+        @method('PUT')
+        <div class="modal-body">
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="name" class="form-label">Nama</label>
+                    <input type="text" id="name" class="form-control" value="{{ $student->name }}" disabled>
                 </div>
-              </div>
             </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="uid">UID</label>
-              <div class="col-sm-10">
-                <select name="uid" id="uid" class="form-select" required>
-                  @foreach($uids as $uidId => $uid)
-                  <option value="{{ $uid }}" {{ $uidId == $students->uid ? 'selected' : '' }}>{{ $uid }}</option>
-                  @endforeach
-                </select>
-              </div>
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="uid" class="form-label">UID</label>
+                    <select name="uid" id="uid" class="form-select">
+                        <option value="">Pilih UID</option>
+                    </select>
+                </div>
             </div>
-            <div class="row justify-content-end">
-              <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Ubah</button>
-                <a href="{{ url('/siswa/') }}" class="btn btn-secondary">Close</a>
-              </div>
-            </div>
-          </form>
         </div>
-      </div>
-    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Ubah</button>
+        </div>
+    </form>
   </div>
-  </div>
-  <!-- / Content -->
-
-
-  @endsection
-</body>
-
-</html>
