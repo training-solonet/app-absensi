@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class StudentController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
         $query = Student::where('status', 'Aktif')
             ->whereDate('date_in', '<=', now())
@@ -20,15 +20,14 @@ class StudentController extends Controller
 
         if ($request->has('search')) {
             $query->whereHas('majors', function ($query) use ($request) {
-            $query->where('name', 'like', '%' . $request->input('search') . '%');
+                $query->where('name', 'like', '%' . $request->input('search') . '%');
             });
         }
 
-        $Students = $query->with('majors')->get();
-        $student = Student::with(['majors', 'Uid', 'school'])->findOrFail($id);
+        $students = $query->with('majors')->get();
         $majors = Major::all();
 
-        return view('siswa.index', compact('Students', 'majors', 'student'));
+        return view('siswa.index', compact('students', 'majors'));
     }
 
     /**
