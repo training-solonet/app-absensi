@@ -7,7 +7,6 @@ use App\Models\Absensi;
 use App\Models\Student;
 use App\Models\Uid;
 use Carbon\Carbon;
-use Intervention\Image\Facades\Image;
 
 class DashboardController extends Controller
 {
