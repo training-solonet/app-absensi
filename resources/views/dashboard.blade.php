@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>dashboard</title>
+  <style>
+    .card-img {
+      object-fit: cover;  /* Menyesuaikan gambar agar terlihat dengan baik di area yang ditentukan */
+    }
+  </style>
 </head>
 <body>
     @extends('layouts.app')
@@ -27,7 +32,7 @@
               <div class="card mb-2">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img class="card-img card-img-left" src="{{ 'https://siswa.cvconnectis.com/images/'.$absensi->students->img }}" alt="Card image" />
+                    <img class="card-img card-img-left" src="{{ 'https://siswa.cvconnectis.com/images/thumbnail/'.$absensi->students->img }}" style="width: 115px; height: 155px;" alt="Card image" />
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
@@ -46,7 +51,7 @@
               <div class="card mb-2">
                 <div class="row g-0">
                   <div class="col-md-4">
-                    <img style="width: 100px; height: 150px;" class="card-img card-img-left" src="{{ 'https://siswa.cvconnectis.com/images/'.$absensi->students->img }}" h7 alt="Card image" />
+                    <img class="card-img card-img-left" src="{{ 'https://siswa.cvconnectis.com/images/thumbnail/'.$absensi->students->img }}" style="width: 115px; height: 155px;" alt="Card image" />
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
