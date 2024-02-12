@@ -5,7 +5,7 @@
         <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('siswa.update', $student->id) }}">
+        <form action="{{ route('siswa.update', $student->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="modal-body">
@@ -19,8 +19,12 @@
                 <div class="col mb-3">
                     <label for="uid" class="form-label">UID</label>
                     <select name="uid" id="uid" class="form-select">
+                    @if ($student->Uid)
+                        <option value="{{ $student->Uid->uid }}">{{ $student->Uid->uid }}</option>
+                    @else
                         <option value="">Pilih UID</option>
-                    </select>
+                    @endif
+                </select>
                 </div>
             </div>
         </div>
