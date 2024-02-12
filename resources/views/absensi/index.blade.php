@@ -29,30 +29,30 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="GET" action="{{ route('absensi.index') }}">
-          <div class="row g-2">
-            <div class="col mb-0">
-              <label for="start_date" class="form-label">Awal Tanggal</label>
-              <input type="date" name="start_date" id="start_date" class="form-control" value="{{ $searchStartDate }}" required>
+          <form method="GET" action="{{ route('absensi.index') }}">
+            <div class="row g-2">
+                <div class="col mb-0">
+                    <label for="start_date" class="form-label">Awal Tanggal</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control" value="{{ $searchStartDate }}" required>
+                </div>
+                <div class="col mb-0">
+                    <label for="end_date" class="form-label">Masukan Tanggal</label>
+                    <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
+                </div>
+                <div class="col mb-0">
+                    <label for="major" class="form-label">Jurusan</label>
+                    <select name="search" class="form-select" id="search">
+                        <option value="">Semua Jurusan</option>
+                        @foreach($majors as $major)
+                        <option value="{{ $major->name }}">{{ $major->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <div class="col mb-0">
-              <label for="end_date" class="form-label">Masukan Tanggal</label>
-              <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Cari</button>
             </div>
-            <div class="col mb-0">
-              <label for="major" class="form-label">Jurusan</label>
-              <select name="major" class="form-select" id="major">
-                <option value="">Semua Jurusan</option>
-                @foreach($majors as $major)
-                  <option value="{{ $major }}">{{ $major }}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Cari</button>
-          </div>
         </form>
       </div>
     </div>

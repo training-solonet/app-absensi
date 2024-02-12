@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('majors', function (Blueprint $table) {
+        Schema::connection('mysql2')->create('majors', function (Blueprint $table) {
             $table->id();
             $table->char('name', 100);
             $table->timestamps();
