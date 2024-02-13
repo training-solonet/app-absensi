@@ -26,8 +26,9 @@ class StudentController extends Controller
 
         $students = $query->with('majors')->get();
         $majors = Major::all();
+        $uids = Uid::whereNull('id_siswa')->get();
 
-        return view('siswa.index', compact('students', 'majors'));
+        return view('siswa.index', compact('students', 'majors', 'uids'));
     }
 
     /**
@@ -63,8 +64,13 @@ class StudentController extends Controller
     {
         $students = Student::findOrFail($id);
         $uids = Uid::whereNull('id_siswa')->pluck('uid');
+        // return $uids;
 
-        return view('siswa.edit', compact('students', 'uids'));
+        // return view('siswa.edit', compact('students', 'uids'));
+        return view('siswa.edit', [
+            'students'  => $students,
+            'uids'      => $uids,
+        ]);
     }
 
     /**

@@ -23,6 +23,10 @@
                         <option value="{{ $student->Uid->uid }}">{{ $student->Uid->uid }}</option>
                     @else
                         <option value="">Pilih UID</option>
+                        @foreach($uids as $data){
+                            <option value="{{$data->uid}}">{{$data->uid}}</option>
+                        }
+                        @endforeach
                     @endif
                 </select>
                 </div>
