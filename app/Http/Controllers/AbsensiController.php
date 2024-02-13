@@ -16,24 +16,18 @@ class AbsensiController extends Controller
     $searchStartDate = $request->input('start_date', Carbon::now()->toDateString());
     $searchEndDate = $request->input('end_date', Carbon::now()->toDateString());
 
-    $query = Absensi::whereBetween('tanggal', [$searchStartDate, $searchEndDate]);
+    $jurusan       = $request->input('search');
 
-    if ($request->has('search')) {
-        $query->whereHas('students', function ($query) use ($request) {
-            $query->whereHas('majors', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->input('search') . '%');
-            });
-        });
-    }
-
-    $absen = $query->with(['students', 'majors'])->get();
+    $absen = Absensi::with(['students', 'students.majors'])
+                ->whereBetween('tanggal', [$searchStartDate, $searchEndDate])
+                ->get();
 
     $formattedStartDate = Carbon::parse($searchStartDate)->format('d-m-Y');
     $formattedEndDate = Carbon::parse($searchEndDate)->format('d-m-Y');
 
     $majors = Major::all();
 
-    return view('absensi.index', compact('absen', 'searchStartDate', 'searchEndDate', 'formattedStartDate', 'formattedEndDate', 'majors'));
+    return view('absensi.index', compact('absen', 'searchStartDate', 'searchEndDate', 'formattedStartDate', 'formattedEndDate', 'majors','jurusan'));
     }
 
 

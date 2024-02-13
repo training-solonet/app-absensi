@@ -44,7 +44,7 @@
                     <select name="search" class="form-select" id="search">
                         <option value="">Semua Jurusan</option>
                         @foreach($majors as $major)
-                        <option value="{{ $major->name }}">{{ $major->name }}</option>
+                        <option value="{{ $major->id }}">{{ $major->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -58,7 +58,6 @@
     </div>
   </div>
 </div>
-
 
     <!-- Hoverable Table rows -->
     <div class="card">
@@ -76,20 +75,47 @@
               <th>Jurusan</th>
               <th>Masuk</th>
               <th>Pulang</th>
+              <th>Tanggal</th>
               <th>Keterangan</th>
             </tr>
           </thead>
           <tbody>
+          <!-- Inisialisasi variabel penghitung -->
+          @php
+            $counter = 0; 
+          @endphp
             @forelse ($absen as $key => $absensi)
+            <!-- ketika yang data yang dipilih spesifict 1 jurusan -->
+            @if( $jurusan > 0)
+              <!-- hanya menampilkan data yang jurusannya sesuai yang dipilih -->
+              @if( $absensi->students->majors->id == $jurusan)
+              <!-- Menambah penghitung untuk jurusan tertentu -->
+              @php
+                $counter++; 
+              @endphp
               <tr>
-                  <td>{{ $key + 1}}</td>
+                  <td>{{ $counter }}</td>
                   <td>{{ $absensi->students->name }}</td>
                   <td>{{ $absensi->students->majors->name}}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
+                  <td>{{ $absensi->tanggal }}</td>
                   <td>{{ $absensi->keterangan }}</td>
                   </td>
               </tr>
+              @endif
+            @else 
+            <tr>
+                <td>{{ $key + 1 }}</td>
+                <td>{{ $absensi->students->name }}</td>
+                <td>{{ $absensi->students->majors->name}}</td>
+                <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
+                <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
+                <td>{{ $absensi->tanggal }}</td>
+                <td>{{ $absensi->keterangan }}</td>
+                </td>
+            </tr>
+            @endif
             @empty
                 <div class="alert alert-danger">
                     Data Absen belum Tersedia.

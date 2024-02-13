@@ -30,19 +30,19 @@
             <li class="menu-item {{ request()->is('siswa') ? 'active' : '' }}">
               <a href="/siswa" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables Siswa</div>
+                <div data-i18n="Tables">Data Siswa</div>
               </a>
             </li>
             <li class="menu-item {{ request()->is('absensi') ? 'active' : '' }}">
               <a href="/absensi" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Laporan Absensi  </div>
+                <div data-i18n="Tables">Report Absensi  </div>
               </a>
             </li>
             <li class="menu-item {{ request()->is('uid') ? 'active' : '' }}">
               <a href="/uid" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables UID</div>
+                <div data-i18n="Tables">Data UID</div>
               </a>
             </li>
           </ul>

@@ -31,7 +31,7 @@ class Absensi extends Model
 
     public function majors()
     {
-        return $this->belongsTo(Major::class, 'majors_id', 'id');
+        return $this->hasMany(Major::class, 'majors_id', 'id');
     }
 
 }
