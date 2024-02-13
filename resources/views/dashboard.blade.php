@@ -22,7 +22,26 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">Absen Hari Ini</h4>
-
+      @if($terlambat->isEmpty() && $alfa->isEmpty() && !$hadir->isEmpty())
+      <div class="alert alert-success" role="alert">
+          Semua siswa hadir hari ini
+      </div>
+      @endif
+      @if($terlambat->isEmpty() && $alfa->isEmpty() && $hadir->isEmpty())
+      <div class="alert alert-info" role="alert">
+          Tidak ada siswa yang melakukan absensi hari ini
+      </div>
+      @endif
+      @if($terlambat->isEmpty() && !$alfa->isEmpty())
+      <div class="alert alert-danger" role="alert">
+          Tidak ada siswa yang terlambat hari ini
+      </div>
+      @endif
+      @if(!$terlambat->isEmpty() && $alfa->isEmpty())
+      <div class="alert alert-secondary" role="alert">
+          Tidak ada siswa yang alfa hari ini
+      </div>
+      @endif
     <!-- Horizontal -->
       <div class="row mb-5">
         <div class="col-md-12">
