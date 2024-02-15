@@ -86,7 +86,7 @@
   </tr>
       @empty
       <div class="alert alert-danger">
-          Data Post belum Tersedia.
+          Data Siswa belum Tersedia.
       </div>
       @endforelse
     </tbody>          
