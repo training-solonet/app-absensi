@@ -58,19 +58,35 @@ class AbsensiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $absensi = Absensi::findOrFail($id);
+
+        // Pastikan hanya absensi dengan keterangan 'Alfa' atau 'Terlambat' yang dapat diedit
+        if ($absensi->keterangan !== 'Alfa' && $absensi->keterangan !== 'Terlambat') {
+            return redirect()->back()->with('error', 'Keterangan tidak dapat diubah.');
+        }
+
+        return view('absensi.edit', compact('absensi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        // Validasi input
+        $request->validate([
+            'keterangan' => 'required|in:Sakit,Ijin,Teknisi,Hadir,Terlambat',
+        ]);
 
+        // Temukan absensi berdasarkan ID
+        $absensi = Absensi::findOrFail($id);
+
+        // Simpan perubahan keterangan absensi
+        $absensi->keterangan = $request->keterangan;
+        $absensi->save();
+
+        // Redirect kembali ke halaman sebelumnya
+        return redirect()->back()->with('success', 'Keterangan berhasil diubah');
+    }
     /**
      * Remove the specified resource from storage.
      */
