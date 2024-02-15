@@ -1,24 +1,43 @@
   <!-- Modal detail siswa -->
   <div class="modal fade" id="detailModal{{ $student->id }}" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen" role="document">
+      <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title">{{ $student->name }}</h5>
+                <h4>BIODATA SISWA</h4>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <div class="row">
                   <!-- Tampilkan foto, alamat, jurusan, sekolah, dll -->
-                  <img style="width: 350px; height: 500px;" src="{{ 'https://siswa.cvconnectis.com/images/'.$student->img }}" alt="Foto Siswa" class="img-fluid"/>
+                  <img style="width: 315px; height: 450px;" src="{{ 'https://siswa.cvconnectis.com/images/'.$student->img }}" alt="Foto Siswa" class="img-fluid"/>
                   <div class="col md-8">
+                      <div class="col mb-3">
+                        <label for="nameBasic" class="form-label">Name :</label>
+                        <input type="text" id="nameBasic" class="form-control" value="{{ $student->name }}" disabled> 
+                      </div>
                     @if ($student->Uid)
-                      <p>UID : {{ $student->Uid->uid }}</p>
+                      <div class="col mb-3">
+                        <label for="nameBasic" class="form-label">UID :</label>
+                        <input type="text" id="nameBasic" class="form-control" value="{{ $student->Uid->uid }}" disabled> 
+                      </div>
                     @else
-                      <p>UID: Tidak Ada</p>
+                      <div class="col mb-3">
+                        <label for="nameBasic" class="form-label">UID :</label>
+                        <input type="text" id="nameBasic" class="form-control" value="Tidak Ada" disabled> 
+                      </div>
                     @endif
-                    <p>Alamat   : {{ $student->address }}</p>
-                    <p>Jurusan  : {{ $student->majors->name }}</p>
-                    <p>Sekolah  : {{ $student->school->name }}</p>
+                      <div class="col mb-3">
+                        <label for="nameBasic" class="form-label">Alamat :</label>
+                        <input type="text" id="nameBasic" class="form-control" value="{{ $student->address }}" disabled> 
+                      </div>
+                      <div class="col mb-3">
+                        <label for="nameBasic" class="form-label">Jurusan :</label>
+                        <input type="text" id="nameBasic" class="form-control" value="{{ $student->majors->name }}" disabled> 
+                      </div>
+                      <div class="col mb-3">
+                        <label for="nameBasic" class="form-label">Sekolah :</label>
+                        <input type="text" id="nameBasic" class="form-control" value="{{ $student->school->name }}" disabled> 
+                      </div>
                   </div>
               </div>
             </div>

@@ -27,18 +27,13 @@
           Semua siswa hadir hari ini
       </div>
       @endif
-      @if($terlambat->isEmpty() && $alfa->isEmpty() && $hadir->isEmpty())
-      <div class="alert alert-info" role="alert">
-          Tidak ada siswa yang melakukan absensi hari ini
-      </div>
-      @endif
       @if($terlambat->isEmpty() && !$alfa->isEmpty())
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-warning" role="alert">
           Tidak ada siswa yang terlambat hari ini
       </div>
       @endif
       @if(!$terlambat->isEmpty() && $alfa->isEmpty())
-      <div class="alert alert-secondary" role="alert">
+      <div class="alert alert-danger" role="alert">
           Tidak ada siswa yang alfa hari ini
       </div>
       @endif
@@ -55,9 +50,9 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h7 class="card-title">{{ $absensi->students->name }}</h7>
-                      <p class="card-text">
-                      Keterangan: {{ $absensi->keterangan }}
+                      <h7 class="card-title fw-bold">{{ $absensi->students->name }}</h7>
+                      <p class="card-text text-warning">
+                       {{ $absensi->keterangan }}
                       </p>
                     </div>
                   </div>
@@ -74,9 +69,9 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h7 class="card-title">{{ $absensi->students->name }}</h7>
-                      <p class="card-text">
-                      Keterangan: Kemarin {{ $absensi->keterangan }}
+                      <h7 class="card-title fw-bold">{{ $absensi->students->name }}</h7>
+                      <p class="card-text text-danger">
+                       Kemarin {{ $absensi->keterangan }}
                       </p>
                     </div>
                   </div>
