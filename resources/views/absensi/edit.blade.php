@@ -14,13 +14,13 @@
             <div class="col mb-3">
               <label for="keterangan" class="form-label">keterangan :</label>
               <select name="keterangan" class="form-select" id="keterangan">
-              @if($absensi->keterangan == 'Alfa' || $absensi->keterangan == 'Terlambat')
+              @if($absensi->keterangan == 'alfa' || $absensi->keterangan == 'Terlambat')
                   <option value="Sakit" {{ $absensi->keterangan == 'Sakit' ? 'selected' : '' }}>Sakit</option>
                   <option value="Ijin" {{ $absensi->keterangan == 'Ijin' ? 'selected' : '' }}>Ijin</option>
                   <option value="Teknisi" {{ $absensi->keterangan == 'Teknisi' ? 'selected' : '' }}>Teknisi</option>
               @endif
                 <option value="Hadir" {{ $absensi->keterangan == 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                <option value="Terlambat" {{ $absensi->keterangan == 'Terlambat' ? 'selected' : '' }}>Terlambat</option>
+                <!-- <option value="Terlambat" {{ $absensi->keterangan == 'Terlambat' ? 'selected' : '' }}>Terlambat</option> -->
               </select>
             </div>
           </div>
