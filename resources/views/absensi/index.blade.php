@@ -39,7 +39,7 @@
                     <label for="end_date" class="form-label">Masukan Tanggal</label>
                     <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
                 </div>
-                <div class="col mb-0">
+                <div class="col mb-2">
                     <label for="major" class="form-label">Jurusan</label>
                     <select name="search" class="form-select" id="search">
                         <option value="">Semua Jurusan</option>
@@ -47,6 +47,7 @@
                         <option value="{{ $major->id }}">{{ $major->name }}</option>
                         @endforeach
                     </select>
+                  </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -57,7 +58,6 @@
       </div>
     </div>
   </div>
-</div>
 
     <!-- Hoverable Table rows -->
     <div class="card">
