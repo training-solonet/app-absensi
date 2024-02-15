@@ -77,6 +77,7 @@
               <th>Pulang</th>
               <th>Tanggal</th>
               <th>Keterangan</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -101,8 +102,14 @@
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
                   <td>{{ $absensi->tanggal }}</td>
                   <td>{{ $absensi->keterangan }}</td>
+                  <td>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
+                    Edit
+                  </button>
+                  </td>
                   </td>
               </tr>
+              @include('absensi.edit', ['absensi' => $absensi])
               @endif
             @else 
             <tr>
@@ -113,8 +120,14 @@
                 <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
                 <td>{{ $absensi->tanggal }}</td>
                 <td>{{ $absensi->keterangan }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
+                    Edit
+                  </button>
+                </td>
                 </td>
             </tr>
+            @include('absensi.edit', ['absensi' => $absensi])
             @endif
             @empty
                 <div class="alert alert-danger">
