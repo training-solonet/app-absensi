@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabel Report</title>
+    <title>Tabel Laporan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 </head>
@@ -13,7 +13,7 @@
 @section('contents')
 
   <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">Report Absensi</h4>
+    <h4 class="fw-bold py-3 mb-4">Laporan Absensi</h4>
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                 <button type="submit" class="btn btn-primary">Cari</button>
             </div>
         </form>
@@ -77,7 +77,7 @@
               <th>Pulang</th>
               <th>Tanggal</th>
               <th>Keterangan</th>
-              <th>Action</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -103,9 +103,11 @@
                   <td>{{ $absensi->tanggal }}</td>
                   <td>{{ $absensi->keterangan }}</td>
                   <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
-                    Edit
-                  </button>
+                  @if ($absensi->keterangan == 'Alfa' || $absensi->keterangan == 'Terlambat')
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
+                        Edit
+                    </button>
+                  @endif
                   </td>
                   </td>
               </tr>
@@ -121,9 +123,11 @@
                 <td>{{ $absensi->tanggal }}</td>
                 <td>{{ $absensi->keterangan }}</td>
                 <td>
+                @if ($absensi->keterangan == 'Alfa' || $absensi->keterangan == 'Terlambat')
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
-                    Edit
+                      Edit
                   </button>
+                @endif
                 </td>
                 </td>
             </tr>
@@ -131,7 +135,7 @@
             @endif
             @empty
                 <div class="alert alert-danger">
-                    Data Absen belum Tersedia.
+                    Data Absensi belum Tersedia.
                 </div>
             @endforelse
           </tbody>
