@@ -36,7 +36,7 @@
             <li class="menu-item {{ request()->is('absensi') ? 'active' : '' }}">
               <a href="/absensi" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Report Absensi  </div>
+                <div data-i18n="Tables">Laporan Absensi  </div>
               </a>
             </li>
             <li class="menu-item {{ request()->is('uid') ? 'active' : '' }}">

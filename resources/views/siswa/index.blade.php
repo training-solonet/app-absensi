@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
           <button type="submit" class="btn btn-primary">Cari</button>
         </div>
       </form>
@@ -62,7 +62,7 @@
           <th>No</th>
           <th>Nama</th>
           <th>Jurusan</th>
-          <th>Actions</th>
+          <th>Aksi</th>
         </tr>
         </thead>
         <tbody>

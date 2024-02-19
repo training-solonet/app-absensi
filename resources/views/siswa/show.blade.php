@@ -12,7 +12,7 @@
                   <img style="width: 315px; height: 450px;" src="{{ 'https://siswa.cvconnectis.com/images/'.$student->img }}" alt="Foto Siswa" class="img-fluid"/>
                   <div class="col md-8">
                       <div class="col mb-3">
-                        <label for="nameBasic" class="form-label">Name :</label>
+                        <label for="nameBasic" class="form-label">Nama :</label>
                         <input type="text" id="nameBasic" class="form-control" value="{{ $student->name }}" disabled> 
                       </div>
                     @if ($student->Uid)
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
             </div>
           </div>
         </div>
