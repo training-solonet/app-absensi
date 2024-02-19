@@ -12,21 +12,21 @@
         <div class="modal-body">
           <div class="row">
             <div class="col mb-3">
-              <label for="keterangan" class="form-label">keterangan :</label>
+              <label for="keterangan" class="form-label">Keterangan :</label>
               <select name="keterangan" class="form-select" id="keterangan">
               @if($absensi->keterangan == 'alfa' || $absensi->keterangan == 'Terlambat')
                   <option value="Sakit" {{ $absensi->keterangan == 'Sakit' ? 'selected' : '' }}>Sakit</option>
                   <option value="Ijin" {{ $absensi->keterangan == 'Ijin' ? 'selected' : '' }}>Ijin</option>
                   <option value="Teknisi" {{ $absensi->keterangan == 'Teknisi' ? 'selected' : '' }}>Teknisi</option>
               @endif
-                <option value="Hadir" {{ $absensi->keterangan == 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                <!-- <option value="Terlambat" {{ $absensi->keterangan == 'Terlambat' ? 'selected' : '' }}>Terlambat</option> -->
+                <!-- <option value="Hadir" {{ $absensi->keterangan == 'Hadir' ? 'selected' : '' }}>Hadir</option>
+                <option value="Terlambat" {{ $absensi->keterangan == 'Terlambat' ? 'selected' : '' }}>Terlambat</option> -->
               </select>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
           <button type="submit" class="btn btn-primary">Ubah</button>
         </div>
       </form>
