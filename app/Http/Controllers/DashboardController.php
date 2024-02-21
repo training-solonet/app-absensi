@@ -17,9 +17,9 @@ class DashboardController extends Controller
     {
 
         // Tanggal yang ingin ditampilkan absennya
-        $targetDate = Carbon::parse('2023-12-15')->toDateString();
+        // $targetDate = Carbon::parse('2023-12-15')->toDateString();
 
-        // $targetDate = Carbon::today();
+        $targetDate = Carbon::today();
 
         // Ambil data absen siswa yang terlambat dan alfa pada tanggal tertentu
         $terlambat = Absensi::with(['students'])
