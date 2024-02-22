@@ -103,7 +103,7 @@
                   <td>{{ $absensi->tanggal }}</td>
                   <td>{{ $absensi->keterangan }}</td>
                   <td>
-                  @if ($absensi->keterangan == 'Alfa' || $absensi->keterangan == 'Terlambat')
+                  @if ($absensi->keterangan == 'alfa' || $absensi->keterangan == 'Terlambat')
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
                         Edit
                     </button>
@@ -123,7 +123,7 @@
                 <td>{{ $absensi->tanggal }}</td>
                 <td>{{ $absensi->keterangan }}</td>
                 <td>
-                @if ($absensi->keterangan == 'Alfa' || $absensi->keterangan == 'Terlambat')
+                @if ($absensi->keterangan == 'alfa' || $absensi->keterangan == 'Terlambat')
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
                       Edit
                   </button>
