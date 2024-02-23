@@ -30,6 +30,7 @@
 
 
                 <!-- User -->
+                @auth
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
@@ -72,6 +73,15 @@
                     </li>
                   </ul>
                 </li>
+                @else
+                <!-- Jika belum login, tampilkan link login
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">
+                        <i class="bx bx-log-in me-2"></i>
+                        <span class="align-middle">Log In</span>
+                    </a>
+                </li> -->
+                @endauth
                 <!--/ User -->
               </ul>
             </div>

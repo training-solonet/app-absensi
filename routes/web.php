@@ -18,13 +18,19 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi')
+    ->name('absensi.index')
+    ->middleware('web');
 
 Route::controller(AuthController::class)->group(function () {  
     Route::get('login', 'login')->name('login');
     Route::post('login', 'loginAction')->name('login.action');
+
+    Route::get('customlogout', 'logout')->middleware('auth')->name('customlogout');
   
     Route::get('logout', 'logout', function () {
         return view('login');
@@ -32,11 +38,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
 
     Route::resources([
-        'absensi' => AbsensiController::class,
         'siswa' => StudentController::class,
         'uid' => UidController::class,
         
