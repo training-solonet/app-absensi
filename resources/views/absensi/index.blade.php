@@ -29,7 +29,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <form method="GET" action="{{ route('absensi.index') }}">
+          <form method="GET" action="{{ url('/absensi') }}">
             <div class="row g-2">
                 <div class="col mb-0">
                     <label for="start_date" class="form-label">Awal Tanggal</label>
@@ -55,7 +55,7 @@
                 <button type="submit" class="btn btn-primary">Cari</button>
             </div>
         </form>
-      </div>
+      </div> 
     </div>
   </div>
 
@@ -77,7 +77,9 @@
               <th>Pulang</th>
               <th>Tanggal</th>
               <th>Keterangan</th>
+              @auth
               <th>Aksi</th>
+              @endauth
             </tr>
           </thead>
           <tbody>
@@ -100,8 +102,9 @@
                   <td>{{ $absensi->students->majors->name}}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
-                  <td>{{ $absensi->tanggal }}</td>
+                  <td>{{ Carbon\Carbon::parse($absensi->tanggal)->format('d/m/Y') }}</td>
                   <td>{{ $absensi->keterangan }}</td>
+                  @auth
                   <td>
                   @if ($absensi->keterangan == 'alfa' || $absensi->keterangan == 'Terlambat')
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
@@ -109,6 +112,7 @@
                     </button>
                   @endif
                   </td>
+                  @endauth
                   </td>
               </tr>
               @include('absensi.edit', ['absensi' => $absensi])
@@ -120,8 +124,9 @@
                 <td>{{ $absensi->students->majors->name}}</td>
                 <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
                 <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
-                <td>{{ $absensi->tanggal }}</td>
+                <td>{{ Carbon\Carbon::parse($absensi->tanggal)->format('d/m/Y') }}</td>
                 <td>{{ $absensi->keterangan }}</td>
+                @auth
                 <td>
                 @if ($absensi->keterangan == 'alfa' || $absensi->keterangan == 'Terlambat')
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $absensi->id }}">
@@ -129,6 +134,7 @@
                   </button>
                 @endif
                 </td>
+                @endauth
                 </td>
             </tr>
             @include('absensi.edit', ['absensi' => $absensi])

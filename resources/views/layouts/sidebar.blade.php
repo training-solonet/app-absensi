@@ -27,16 +27,17 @@
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Tables</span></li>
             <!-- Tables -->
-            <li class="menu-item {{ request()->is('siswa') ? 'active' : '' }}">
-              <a href="/siswa" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Data Siswa</div>
-              </a>
-            </li>
             <li class="menu-item {{ request()->is('absensi') ? 'active' : '' }}">
               <a href="/absensi" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Laporan Absensi  </div>
+              </a>
+            </li>
+            @auth
+            <li class="menu-item {{ request()->is('siswa') ? 'active' : '' }}">
+              <a href="/siswa" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">Data Siswa</div>
               </a>
             </li>
             <li class="menu-item {{ request()->is('uid') ? 'active' : '' }}">
@@ -45,5 +46,6 @@
                 <div data-i18n="Tables">Data UID</div>
               </a>
             </li>
+            @endauth
           </ul>
         </aside>
