@@ -60,35 +60,40 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
-    {
-        $students = Student::findOrFail($id);
-        $uids = Uid::whereNull('id_siswa')->pluck('uid');
-        // return $uids;
-
-        // return view('siswa.edit', compact('students', 'uids'));
-        return view('siswa.edit', [
-            'students'  => $students,
-            'uids'      => $uids,
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'uid' => 'required|unique:uids,uid,' . $id,
-        ]);
-
-        $students = Student::findOrFail($id);
-        $students->update($request->all());
-
-        return redirect()->route('siswa.show')->with('success', 'Data siswa berhasil diupdate');
-
-    }
-
+    
+     public function edit($id)
+     {
+         $student = Student::with(['majors', 'Uid', 'school'])->findOrFail($id);
+ 
+         return view('siswa.edit', compact('student'));
+     }
+ 
+     public function update(Request $request, $id)
+     {
+         $student = Student::findOrFail($id);
+         
+         if ($student->Uid) {
+             // Siswa sudah memiliki UID, jalankan fungsi update
+             $uid = Uid::where('id_siswa', $id)->first();
+             $uid->id_siswa = $request->input('id_siswa');
+             $uid->save();
+         } else {
+             // Siswa belum memiliki UID, jalankan fungsi create
+             $existingUid = Uid::where('uid', $request->input('uid'))->first();
+ 
+             if ($existingUid) {
+                 $existingUid->id_siswa = $id;
+                 $existingUid->save();
+             } else {
+                 $uid = new Uid();
+                 $uid->uid = $request->input('uid');
+                 $uid->id_siswa = $id;
+                 $uid->save();
+             }
+         }
+ 
+         return redirect()->route('siswa.index')->with('success', 'UID berhasil diperbarui');
+     }
     /**
      * Remove the specified resource from storage.
      */
