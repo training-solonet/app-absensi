@@ -40,12 +40,6 @@
                 <div data-i18n="Tables">Data Siswa</div>
               </a>
             </li>
-            <li class="menu-item {{ request()->is('uid') ? 'active' : '' }}">
-              <a href="/uid" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Data UID</div>
-              </a>
-            </li>
             @endauth
           </ul>
         </aside>
