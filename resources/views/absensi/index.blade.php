@@ -88,10 +88,13 @@
             $counter = 0; 
           @endphp
             @forelse ($absen as $key => $absensi)
+
             <!-- ketika yang data yang dipilih spesifict 1 jurusan -->
             @if( $jurusan > 0)
+
               <!-- hanya menampilkan data yang jurusannya sesuai yang dipilih -->
               @if( $absensi->students->majors->id == $jurusan)
+              
               <!-- Menambah penghitung untuk jurusan tertentu -->
               @php
                 $counter++; 
@@ -100,8 +103,8 @@
                   <td>{{ $counter }}</td>
                   <td>{{ $absensi->students->name }}</td>
                   <td>{{ $absensi->students->majors->name}}</td>
-                  <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
-                  <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
+                  <td>{{ $absensi->waktu_masuk ? Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') : '' }}</td>
+                  <td>{{ $absensi->waktu_keluar ? Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') : '' }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->tanggal)->format('d/m/Y') }}</td>
                   <td>{{ $absensi->keterangan }}</td>
                   @auth
@@ -122,8 +125,8 @@
                 <td>{{ $key + 1 }}</td>
                 <td>{{ $absensi->students->name }}</td>
                 <td>{{ $absensi->students->majors->name}}</td>
-                <td>{{ Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') }}</td>
-                <td>{{ Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') }}</td>
+                <td>{{ $absensi->waktu_masuk ? Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') : '' }}</td>
+                <td>{{ $absensi->waktu_keluar ? Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') : '' }}</td>
                 <td>{{ Carbon\Carbon::parse($absensi->tanggal)->format('d/m/Y') }}</td>
                 <td>{{ $absensi->keterangan }}</td>
                 @auth

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UidController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -38,10 +37,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-
     Route::resources([
         'siswa' => StudentController::class,
-        'uid' => UidController::class,
-        
     ]);
 });
