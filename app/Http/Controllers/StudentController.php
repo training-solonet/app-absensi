@@ -61,39 +61,52 @@ class StudentController extends Controller
      * Show the form for editing the specified resource.
      */
     
-     public function edit($id)
-     {
-         $student = Student::with(['majors', 'Uid', 'school'])->findOrFail($id);
- 
-         return view('siswa.edit', compact('student'));
-     }
- 
-     public function update(Request $request, $id)
-     {
-         $student = Student::findOrFail($id);
-         
-         if ($student->Uid) {
-             // Siswa sudah memiliki UID, jalankan fungsi update
-             $uid = Uid::where('id_siswa', $id)->first();
-             $uid->id_siswa = $request->input('id_siswa');
-             $uid->save();
-         } else {
-             // Siswa belum memiliki UID, jalankan fungsi create
-             $existingUid = Uid::where('uid', $request->input('uid'))->first();
- 
-             if ($existingUid) {
-                 $existingUid->id_siswa = $id;
-                 $existingUid->save();
-             } else {
-                 $uid = new Uid();
-                 $uid->uid = $request->input('uid');
-                 $uid->id_siswa = $id;
-                 $uid->save();
-             }
-         }
- 
-         return redirect()->route('siswa.index')->with('success', 'UID berhasil diperbarui');
-     }
+    public function edit($id)
+    {
+        $student = Student::with(['majors', 'Uid', 'school'])->findOrFail($id);
+
+        return view('siswa.edit', compact('student'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        
+    $student = Student::findOrFail($id);
+    
+    $newUid = $request->input('uid');
+    
+    // Check if the new UID already exists
+    $existingUid = Uid::where('uid', $newUid)->first();
+    
+    // Update UID without confirmation
+    if ($existingUid && $existingUid->id_siswa !== $id) {
+        // UID is used by another student, update it anyway
+        $existingUid->id_siswa = $id;
+        $existingUid->save();
+    } else {
+        // If UID doesn't exist or it's used by the same student, update UID
+        if ($student->Uid) {
+            // Siswa sudah memiliki UID, jalankan fungsi update
+            $uid = Uid::where('id_siswa', $id)->first();
+            $uid->id_siswa = $request->input('id_siswa');
+            $uid->save();
+        } else {
+            // Siswa belum memiliki UID, jalankan fungsi create
+            if ($existingUid) {
+                $existingUid->id_siswa = $id;
+                $existingUid->save();
+            } else {
+                $uid = new Uid();
+                $uid->uid = $newUid;
+                $uid->id_siswa = $id;
+                $uid->save();
+            }
+        }
+    }
+        return redirect()->route('siswa.index')->with('success', 'UID berhasil diperbarui');
+    }
+     
+     
     /**
      * Remove the specified resource from storage.
      */

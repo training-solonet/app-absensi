@@ -54,6 +54,51 @@
       </div>
     </div>
 
+<div class="card">
+  <h5 class="card-header">Data Siswa PKL Aktif</h5>
+    <div class="table-responsive text-nowrap">
+      <div class="container mt-3">
+      <table id="myTable" class="table table-hover">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Uid</th>
+          <th>Jurusan</th>
+          <th>Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse ($students as $key => $student)
+          <tr>
+              <td>{{ $key + 1 }}</td>
+              <td>{{ $student->name }}</td>
+              @if ($student->Uid)
+              <td>{{ $student->Uid->uid }}</td>
+              @else
+              <td>Tidak Ada</td>
+              @endif
+              <td>{{ $student->majors->name}}</td>
+              <td>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $student->id }}">
+                Detail
+              </button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $student->id }}">
+                Edit
+            </button>
+            </td>
+          </tr>
+          @include('siswa.show', ['student' => $student])
+          @include('siswa.edit', ['student' => $student])
+    </td>
+  </tr>
+      @empty
+      <div class="alert alert-danger">
+          Data Siswa belum Tersedia.
+      </div>
+      @endforelse
+    </tbody>          
+  </table>
     @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
