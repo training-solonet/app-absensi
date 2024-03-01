@@ -65,8 +65,7 @@
       @if(isset($formattedStartDate) && isset($formattedEndDate))
       (Data dari {{ $formattedStartDate }} hingga {{ $formattedEndDate }})
       @endif</h5>                
-      <div class="table-responsive text-nowrap">
-        <div class="container mt-3">
+        <div class="card-body">
         <table id="myTable" class="table table-hover">
           <thead>
             <tr>
@@ -102,7 +101,12 @@
               <tr>
                   <td>{{ $counter }}</td>
                   <td>{{ $absensi->students->name }}</td>
-                  <td>{{ $absensi->students->majors->name}}</td>
+                  <td>{{ str_replace([
+                    'Teknik Komputer Jaringan (TKJ)', 
+                    'Sistem Informasi (SI)',
+                    'Teknik Informatika (TI)',
+                    'Rekayasa Perangkat Lunak (RPL)'],
+                    ['TKJ', 'SI', 'TI', 'RPL'], $absensi->students->majors->name) }}</td>
                   <td>{{ $absensi->waktu_masuk ? Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') : '' }}</td>
                   <td>{{ $absensi->waktu_keluar ? Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') : '' }}</td>
                   <td>{{ Carbon\Carbon::parse($absensi->tanggal)->format('d/m/Y') }}</td>
@@ -121,12 +125,22 @@
               @include('absensi.edit', ['absensi' => $absensi])
               @endif
             @else 
-            <tr>
+        
+              @if (strpos($absensi->students->majors->name, 'Teknik Komputer Jaringan (TKJ)') !==false ||
+              strpos($absensi->students->majors->name, 'Sistem Informasi (SI)') !==false ||
+              strpos($absensi->students->majors->name, 'Teknik Informatika (TI)') !==false ||
+              strpos($absensi->students->majors->name, 'Rekayasa Perangkat Lunak (RPL)') !==false)
+              <tr>
                 <td>{{ $key + 1 }}</td>
                 <td>{{ $absensi->students->name }}</td>
-                <td>{{ $absensi->students->majors->name}}</td>
-                <td>{{ $absensi->waktu_masuk ? Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') : '' }}</td>
-                <td>{{ $absensi->waktu_keluar ? Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') : '' }}</td>
+                <td>{{ str_replace([
+                    'Teknik Komputer Jaringan (TKJ)', 
+                    'Sistem Informasi (SI)',
+                    'Teknik Informatika (TI)',
+                    'Rekayasa Perangkat Lunak (RPL)'],
+                    ['TKJ', 'SI', 'TI', 'RPL'], $absensi->students->majors->name) }}</td>
+                <td>{{ $absensi->waktu_masuk ? Carbon\Carbon::parse($absensi->waktu_masuk)->format('H:i:s') : '-' }}</td>
+                <td>{{ $absensi->waktu_keluar ? Carbon\Carbon::parse($absensi->waktu_keluar)->format('H:i:s') : '-' }}</td>
                 <td>{{ Carbon\Carbon::parse($absensi->tanggal)->format('d/m/Y') }}</td>
                 <td>{{ $absensi->keterangan }}</td>
                 @auth
@@ -142,6 +156,7 @@
             </tr>
             @include('absensi.edit', ['absensi' => $absensi])
             @endif
+            @endif
             @empty
                 <div class="alert alert-danger">
                     Data Absensi belum Tersedia.
@@ -149,7 +164,6 @@
             @endforelse
           </tbody>
         </table>
-        </div>
         <script
           src="https://code.jquery.com/jquery-3.7.1.min.js"
           integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
