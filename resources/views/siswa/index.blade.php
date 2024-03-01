@@ -61,6 +61,7 @@
         <tr>
           <th>No</th>
           <th>Nama</th>
+          <th>Uid</th>
           <th>Jurusan</th>
           <th>Aksi</th>
         </tr>
@@ -70,6 +71,11 @@
           <tr>
               <td>{{ $key + 1 }}</td>
               <td>{{ $student->name }}</td>
+              @if ($student->Uid)
+              <td>{{ $student->Uid->uid }}</td>
+              @else
+              <td>Tidak Ada</td>
+              @endif
               <td>{{ $student->majors->name}}</td>
               <td>
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $student->id }}">
