@@ -15,49 +15,49 @@
   <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">Laporan Absensi</h4>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">
-      Filter Pencarian
-    </button>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#searchModal">
+    Filter Pencarian
+  </button>
 
-    <!-- Modal -->
-<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel1">Cari Data Absensi</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <form method="GET" action="{{ url('/absensi') }}">
-            <div class="row g-2">
-                <div class="col mb-0">
-                    <label for="start_date" class="form-label">Awal Tanggal</label>
-                    <input type="date" name="start_date" id="start_date" class="form-control" value="{{ $searchStartDate }}" required>
-                </div>
-                <div class="col mb-0">
-                    <label for="end_date" class="form-label">Masukan Tanggal</label>
-                    <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
-                </div>
-                <div class="col mb-2">
-                    <label for="major" class="form-label">Jurusan</label>
-                    <select name="search" class="form-select" id="search">
-                        <option value="">Semua Jurusan</option>
-                        @foreach($majors as $major)
-                        <option value="{{ $major->id }}">{{ $major->name }}</option>
-                        @endforeach
-                    </select>
+  <!-- Modal -->
+  <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1">Cari Data Absensi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="GET" action="{{ url('/absensi') }}">
+              <div class="row g-2">
+                  <div class="col mb-0">
+                      <label for="start_date" class="form-label">Awal Tanggal</label>
+                      <input type="date" name="start_date" id="start_date" class="form-control" value="{{ $searchStartDate }}" required>
                   </div>
-                </div>
-            </div>
-            <div class="modal-footer">
+                  <div class="col mb-0">
+                      <label for="end_date" class="form-label">Masukan Tanggal</label>
+                      <input type="date" name="end_date" id="end_date" value="{{ $searchEndDate }}" class="form-control">
+                  </div>
+                  <div class="col mb-2">
+                      <label for="major" class="form-label">Jurusan</label>
+                      <select name="search" class="form-select" id="search">
+                          <option value="">Semua Jurusan</option>
+                          @foreach($majors as $major)
+                          <option value="{{ $major->id }}">{{ $major->name }}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
                 <button type="submit" class="btn btn-primary">Cari</button>
-            </div>
-        </form>
-      </div> 
+              </div>
+          </form>
+        </div> 
+      </div>
     </div>
-  </div>
 
     <!-- Hoverable Table rows -->
     <div class="card">

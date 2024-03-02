@@ -54,100 +54,61 @@
       </div>
     </div>
 
-<div class="card">
-  <h5 class="card-header">Data Siswa PKL Aktif</h5>
-    <div class="table-responsive text-nowrap">
-      <div class="container mt-3">
-      <table id="myTable" class="table table-hover">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Nama</th>
-          <th>Uid</th>
-          <th>Jurusan</th>
-          <th>Aksi</th>
-        </tr>
-        </thead>
-        <tbody>
-        @forelse ($students as $key => $student)
-          <tr>
-              <td>{{ $key + 1 }}</td>
-              <td>{{ $student->name }}</td>
-              @if ($student->Uid)
-              <td>{{ $student->Uid->uid }}</td>
-              @else
-              <td>Tidak Ada</td>
-              @endif
-              <td>{{ $student->majors->name}}</td>
-              <td>
-              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $student->id }}">
-                Detail
-              </button>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $student->id }}">
-                Edit
-            </button>
-            </td>
-          </tr>
-          @include('siswa.show', ['student' => $student])
-          @include('siswa.edit', ['student' => $student])
-    </td>
-  </tr>
-      @empty
-      <div class="alert alert-danger">
-          Data Siswa belum Tersedia.
-      </div>
-      @endforelse
-    </tbody>          
-  </table>
-    @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
+  @if (session('success'))
+  <div class="alert alert-success">
+      {{ session('success') }}
+  </div>
+  @endif
 
-    <div class="card">
-      <h5 class="card-header">Data Siswa PKL Aktif</h5>
-        <div class="card-body">
-          <table id="myTable" class="table table-hover">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Jurusan</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @forelse ($students as $key => $student)
-              <tr>
+  <div class="card">
+    <h5 class="card-header">Data Siswa PKL Aktif</h5>
+      <div class="table-responsive text-nowrap">
+        <div class="container mt-3">
+        <table id="myTable" class="table table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Uid</th>
+            <th>Jurusan</th>
+            <th>Aksi</th>
+          </tr>
+          </thead>
+          <tbody>
+          @forelse ($students as $key => $student)
+            <tr>
                 <td>{{ $key + 1 }}</td>
                 <td>{{ $student->name }}</td>
+                @if ($student->Uid)
+                <td>{{ $student->Uid->uid }}</td>
+                @else
+                <td>Tidak Ada</td>
+                @endif
                 <td>{{ str_replace([
-                'Teknik Komputer Jaringan (TKJ)', 
-                'Sistem Informasi (SI)',
-                'Teknik Informatika (TI)',
-                'Rekayasa Perangkat Lunak (RPL)'],
-                ['TKJ', 'SI', 'TI', 'RPL'], $student->majors->name) }}</td>
+                  'Teknik Komputer Jaringan (TKJ)', 
+                  'Sistem Informasi (SI)',
+                  'Teknik Informatika (TI)',
+                  'Rekayasa Perangkat Lunak (RPL)'],
+                  ['TKJ', 'SI', 'TI', 'RPL'], $student->majors->name) }}</td>
                 <td>
-                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $student->id }}">
-                    Detail
-                  </button>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $student->id }}">
-                    Edit
-                  </button>
-                </td>
-              </tr>
-              @include('siswa.show', ['student' => $student])
-              @include('siswa.edit', ['student' => $student])
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $student->id }}">
+                  Detail
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $student->id }}">
+                  Edit
+              </button>
               </td>
-              </tr>
-              @empty
-              <div class="alert alert-danger">
-                Data Siswa belum Tersedia.
-              </div>
-              @endforelse
-            </tbody>
-          </table>
+            </tr>
+            @include('siswa.show', ['student' => $student])
+            @include('siswa.edit', ['student' => $student])
+            </tr>
+            @empty
+            <div class="alert alert-danger">
+              Data Siswa belum Tersedia.
+            </div>
+            @endforelse
+          </tbody>          
+        </table>
           <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
           <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
           <script>
@@ -161,5 +122,4 @@
 
   @endsection
 </body>
-
 </html>
